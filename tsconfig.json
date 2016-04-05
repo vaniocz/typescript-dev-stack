@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "removeComments": true,
+        "newLine": "LF"
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useCache": true,
+        "useBabel": true,
+        "babelOptions": {
+            "presets": ["es2015"]
+        }
+    },
+    "files": ["typings/main.d.ts", "src/index.ts"]
+}

@@ -1,0 +1,12 @@
+{
+  "ambientDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160316155526",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "webpack-env": "registry:dt/webpack-env#1.12.2+20160316155526",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160316155526"
+  },
+  "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160402210230",
+    "lodash": "registry:npm/lodash#4.0.0+20160305082308"
+  }
+}

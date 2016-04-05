@@ -1,0 +1,7 @@
+/.awcache
+/.idea
+/.tmp
+/.vscode
+/node_modules
+/typings
+/nbproject
