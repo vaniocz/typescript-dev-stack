@@ -6,14 +6,12 @@
         "experimentalDecorators": true,
         "removeComments": true,
         "newLine": "LF",
-        "outDir": ".tmp/built"
+        "outDir": ".tmp/typescript"
     },
     "awesomeTypescriptLoaderOptions": {
         "useCache": true,
-        "useBabel": true,
-        "babelOptions": {
-            "presets": ["es2015"]
-        }
+        "cacheDirectory": ".tmp/awesome-typescript-loader",
+        "useBabel": true
     },
     "exclude": ["node_modules", "typings/browser", "typings/main", "typings/browser.d.ts"]
 }

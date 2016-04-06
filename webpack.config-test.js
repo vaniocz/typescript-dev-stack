@@ -1,4 +1,4 @@
-var config = require('./webpack.config-common');
+var config = require('./webpack.config');
 
 config.devtool = 'inline-source-map';
 

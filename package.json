@@ -1,7 +1,7 @@
 {
   "name": "webstack",
   "version": "0.1.0",
-  "description": "Webstack using modified TypeScript (ES7 bind operator) together with Babel (async/await and generators in ES5)",
+  "description": "Development stack for building modern web applications or libraries based on webpack using modified TypeScript 1.8 together with Babel (async/await and generators in ES5)",
   "author": "Marek Štípek <mario.dweller@seznam.cz>",
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,9 @@
     "chai": "^3.5.0",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.3",
+    "karma-detect-browsers": "^2.1.0",
     "karma-firefox-launcher": "^0.1.7",
+    "karma-ie-launcher": "^0.2.0",
     "karma-mocha": "^0.2.2",
     "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "^1.0.0",
@@ -39,10 +41,13 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "build": "node_modules/.bin/webpack",
+    "postinstall": "node_modules/.bin/typings install",
+    "start": "node_modules/.bin/webpack-dev-server --hot",
     "test": "npm run mocha && npm run karma",
+    "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
+    "build-dev": "node_modules/.bin/webpack -d",
     "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config-test.js \"tests/server/**/*.ts\" --colors",
     "karma": "node_modules/.bin/karma start",
-    "start": "node_modules/.bin/webpack-dev-server"
+    "karma-all": "node_modules/.bin/karma start --detectBrowsers"
   }
 }
