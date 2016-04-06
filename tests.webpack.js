@@ -1,4 +1,4 @@
-var context = require.context('./tests', true, /.tsx?$/);
+var context = require.context('./tests/client', true, /.tsx?$/);
 context.keys().forEach(context);
 
 module.exports = context;

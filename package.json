@@ -40,6 +40,7 @@
   },
   "scripts": {
     "build": "node_modules/.bin/webpack",
+    "test": "npm run mocha && npm run karma",
     "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config-test.js \"tests/server/**/*.ts\" --colors",
     "karma": "node_modules/.bin/karma start",
     "start": "node_modules/.bin/webpack-dev-server"
