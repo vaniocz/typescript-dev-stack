@@ -26,6 +26,7 @@
     "karma-chrome-launcher": "^0.2.3",
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
+    "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
@@ -38,8 +39,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "build": "webpack",
-    "test": "mocha-webpack --webpack-config webpack.config-test.js \"tests/server/**/*.ts\" --colors",
-    "start": "webpack-dev-server"
+    "build": "node_modules/.bin/webpack",
+    "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config-test.js \"tests/server/**/*.ts\" --colors",
+    "karma": "node_modules/.bin/karma start",
+    "start": "node_modules/.bin/webpack-dev-server"
   }
 }

@@ -12,6 +12,9 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.webpack\.js$/,
+                loader: 'babel-loader'
+            }, {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader'
             }

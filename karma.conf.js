@@ -3,14 +3,25 @@ var testConfig = require('./webpack.config-test');
 
 module.exports = function (config) {
     config.set({
-        browsers: ['Chrome'],
-        singleRun: true,
+        browsers: ['Firefox'],
+        //singleRun: true,
         frameworks: ['mocha'],
         files: ['tests.webpack.js'],
         preprocessors: {
             'tests.webpack.js': ['webpack', 'sourcemap']
         },
-        reporters: ['dots'],
-        webpack: testConfig
+        reporters: ['mocha'],
+        webpack: testConfig,
+        client: {
+            mocha: {
+                reporter: 'html'
+            }
+        },
+        webpackMiddleware: {
+            noInfo: true,
+            stats: {
+                colors: true
+            }
+        }
     });
 };
