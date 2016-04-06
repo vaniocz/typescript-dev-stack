@@ -2,10 +2,11 @@
     "compilerOptions": {
         "target": "es6",
         "moduleResolution": "node",
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "experimentalDecorators": true,
         "removeComments": true,
-        "newLine": "LF"
+        "newLine": "LF",
+        "outDir": ".tmp/built"
     },
     "awesomeTypescriptLoaderOptions": {
         "useCache": true,
@@ -14,5 +15,5 @@
             "presets": ["es2015"]
         }
     },
-    "files": ["typings/main.d.ts", "src/index.ts"]
+    "exclude": ["node_modules", "typings/browser", "typings/main", "typings/browser.d.ts"]
 }

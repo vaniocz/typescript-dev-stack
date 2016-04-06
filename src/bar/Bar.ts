@@ -6,9 +6,4 @@ export default class Bar
     {
         return _.upperCase('world');
     }
-    
-    public static nonCovered(): string
-    {
-        return 'foo';
-    }
 }

@@ -13,7 +13,7 @@ config.devServer = {
     hot: true,
     historyApiFallback: {index: '/dist/index.html'},
     inline: true,
-    stats: 'errors-only',
+    stats: 'errors-only'
 };
 config.plugins = [new webpack.HotModuleReplacementPlugin];
 

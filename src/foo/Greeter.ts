@@ -26,7 +26,7 @@ export default class Greeter
     public async testAsync(): Promise<string>
     {
         const response = await fetch('/dist/index.html'); // async/await transpiles to ES5 using Babel!
-        
+
         return response.text();
     }
 }

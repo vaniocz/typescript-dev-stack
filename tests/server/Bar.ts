@@ -1,9 +1,8 @@
 import {assert} from 'chai';
 import Bar from 'bar/Bar';
 
-describe('test', () => {
-    it('foo', () => {
+describe('Bar', () => {
+    it('knows about the world', () => {
         assert.strictEqual('WORLD', Bar.world());
-        assert.strictEqual('foo', Bar.nonCovered());
     });
 });
