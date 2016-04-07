@@ -45,9 +45,9 @@
     "start": "node_modules/.bin/webpack-dev-server --hot",
     "test": "npm run mocha && npm run karma",
     "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
-    "build-dev": "node_modules/.bin/webpack -d",
+    "build:dev": "node_modules/.bin/webpack -d",
     "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config-test.js \"tests/server/**/*.ts\" --colors",
     "karma": "node_modules/.bin/karma start",
-    "karma-all": "node_modules/.bin/karma start --detectBrowsers"
+    "karma:all": "node_modules/.bin/karma start --detectBrowsers"
   }
 }

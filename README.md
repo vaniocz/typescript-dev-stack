@@ -8,10 +8,10 @@ It tries current directory before trying `node_modules` and `src` while traversi
 - `npm start` - starts webpack dev server (hot module replacement enabled)
 - `npm test` - runs all tests
 - `npm run build` - builds bundle for production
-- `npm run build-dev` - builds bundle for development
-- `npm run mocha` - runs tests in `tests/server` directory using mocha in Node.js environment
+- `npm run build:dev` - builds bundle for development
 - `npm run karma` - runs tests in `tests/client` directory using karma & mocha in PhantomJS
-- `npm run karma-all` - runs tests in `tests/client` directory using karma & mocha in all detected browsers
+- `npm run karma:all` - runs tests in `tests/client` directory using karma & mocha in all detected browsers
+- `npm run mocha` - runs tests in `tests/server` directory using mocha in Node.js environment
 
 Don't forget it is possible to pass arguments to these commands like `npm run mocha -- --watch`.
 
