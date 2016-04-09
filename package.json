@@ -40,7 +40,7 @@
     "mocha": "^2.4.5",
     "mocha-webpack": "^0.3.0",
     "phantomjs-prebuilt": "^2.1.7",
-    "typescript": "https://github.com/maryo/TypeScript/archive/bindOperator-1.8.tar.gz",
+    "typescript": "https://github.com/maryo/TypeScript/tarball/bindOperator-1.8",
     "typings": "^0.7.11",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"

@@ -13,6 +13,11 @@ module.exports = function (config) {
         },
         reporters: ['mocha'],
         webpack: testConfig,
+        client: {
+            mocha: {
+                reporter: 'html'
+            }
+        },
         webpackMiddleware: {
             noInfo: true,
             stats: {
