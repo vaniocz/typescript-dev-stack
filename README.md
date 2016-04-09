@@ -51,5 +51,4 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 - LESS with autoprefixer
 - React and JSX examples
 - TSLint
-- Fix source maps in Karma which don't work (but works with Babel only)
 - Switch to Webpack2 (Tree-shaking)
