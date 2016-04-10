@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var testConfig = require('./webpack.config-test');
+var webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
     config.set({
@@ -12,7 +12,7 @@ module.exports = function (config) {
             'tests/client.js': ['webpack', 'sourcemap']
         },
         reporters: ['mocha'],
-        webpack: testConfig,
+        webpack: webpackConfig,
         client: {
             mocha: {
                 reporter: 'html'

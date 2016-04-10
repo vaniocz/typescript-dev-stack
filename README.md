@@ -15,7 +15,7 @@ It tries current directory before trying `node_modules` and `src` while traversi
 
 Don't forget it is possible to pass arguments to these commands like `npm run mocha -- --watch`.
 
-![screenshot from Chrome](/dist/chrome.png)
+![screenshot from Chrome](https://i.imgsafe.org/09409a2.png)
 You should prefer Chrome since FF does not handle source maps correctly.
 
 ## IDE support
@@ -35,7 +35,7 @@ Works almost fine when custom compiler is set (File > Settings > Languages and F
 Depending on the version and settings you might also need to turn off JavaScript inspections for `.ts` files.
 But it will still mark ES7 binding operator as an error even it works.
 
-![screenshot from PHPStorm](/dist/phpstorm.png)
+![screenshot from PHPStorm](https://i.imgsafe.org/0b1cfe5.png)
 
 ### NetBeans
 Also works almost fine after installing this plugin - https://github.com/maryo/TypeScript/blob/bindOperator-1.8/netbeanstypescript.nbm
@@ -44,11 +44,10 @@ including the modified TypeScript compiler. But unfortunately there is a bug in 
 It does not automatically import type definitions when importing javascripts having their `.d.ts` file set in it's `package.json`.
 That's also why the `index.ts` file contains a reference to reflect-metadata type definition. You can safely remove it for other editors.
 
-![screenshot from NetBeans](/dist/netbeans.png)
+![screenshot from NetBeans](https://i.imgsafe.org/0a2c943.png)
 
 ### TODO
 - Code coverage using Istanbul
-- LESS with autoprefixer
 - React and JSX examples
 - TSLint
 - Switch to Webpack2 (Tree-shaking)

@@ -5,6 +5,8 @@ import 'whatwg-fetch';
 import 'reflect-metadata';
 import Greeter from 'foo/Greeter';
 
+require('index.less');
+
 const foo = new Greeter;
 const metadataValue = Reflect.getMetadata('myClassMetadata', Greeter);
 foo.greet('foo');
