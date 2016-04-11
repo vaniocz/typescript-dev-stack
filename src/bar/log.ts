@@ -1,13 +1,16 @@
-export default function log(target: Object, method: string, descriptor: TypedPropertyDescriptor<any>)
-{
+export default function log(
+    target: Object,
+    method: string,
+    descriptor: TypedPropertyDescriptor<any>
+): TypedPropertyDescriptor<any> {
     const value = descriptor.value;
     
-    descriptor.value = function (...args: any[]) {
-        var a = args.map((a) => JSON.stringify(a)).join();
-        let result = value.apply(this, args);
-        var r = JSON.stringify(result);
+    descriptor.value = function (...args: any[]): any
+    {
+        const a = args.map((argument) => JSON.stringify(argument)).join();
+        const result = value.apply(this, args);
 
-        console.log(`Method ${method} called with arguments ${a} and returned ${r}.`);
+        console.log(`Method ${method} called with arguments ${a} and returned ${JSON.stringify(result)}.`);
 
         return result;
     };

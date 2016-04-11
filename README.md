@@ -7,6 +7,7 @@ It tries current directory before trying `node_modules` and `src` while traversi
 - `npm install` - installs all dependencies
 - `npm start` - starts webpack dev server (hot module replacement enabled)
 - `npm test` - runs all tests
+- `npm run lint` - validates all TypeScript files using tslint
 - `npm run build` - builds bundle for production
 - `npm run build:dev` - builds bundle for development
 - `npm run karma` - runs tests in `tests/client` directory using karma & mocha in PhantomJS
@@ -49,5 +50,6 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 ### TODO
 - Code coverage using Istanbul
 - React and JSX examples
-- TSLint
 - Switch to Webpack2 (Tree-shaking)
+- Travis
+

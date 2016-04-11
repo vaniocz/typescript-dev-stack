@@ -48,6 +48,8 @@
     "phantomjs-prebuilt": "^2.1.7",
     "postcss-loader": "^0.8.2",
     "style-loader": "^0.13.1",
+    "tslint": "^3.7.1",
+    "tslint-microsoft-contrib": "^2.0.2",
     "typescript": "https://github.com/maryo/TypeScript/tarball/bindOperator-1.8",
     "typings": "^0.7.11",
     "webpack": "^1.12.14",
@@ -59,6 +61,7 @@
     "test": "npm run mocha && npm run karma",
     "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
     "build:dev": "node_modules/.bin/webpack -d",
+    "lint": "node_modules/.bin/tslint **/*.ts **/*.tsx --exclude node_modules/** --exclude typings/**",
     "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/server/**/*.ts\" --colors",
     "karma": "node_modules/.bin/karma start",
     "karma:all": "node_modules/.bin/karma start --detectBrowsers"
