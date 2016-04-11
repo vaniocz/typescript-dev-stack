@@ -13,6 +13,20 @@
     "type": "git",
     "url": "git://github.com/vaniocz/typescript-dev-stack.git"
   },
+  "scripts": {
+    "postinstall": "node_modules/.bin/typings install",
+    "start": "node_modules/.bin/webpack-dev-server --hot --content-base ./build",
+    "test": "npm run mocha && npm run karma",
+    "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
+    "build:dev": "node_modules/.bin/webpack -d",
+    "lint": "node_modules/.bin/tslint **/*.ts **/*.tsx --exclude node_modules/** --exclude typings/**",
+    "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/server/**/*.ts\" --colors",
+    "karma": "node_modules/.bin/karma start",
+    "karma:all": "node_modules/.bin/karma start --detectBrowsers"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "jquery": "^2.2.2",
@@ -54,16 +68,5 @@
     "typings": "^0.7.11",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
-  },
-  "scripts": {
-    "postinstall": "node_modules/.bin/typings install",
-    "start": "node_modules/.bin/webpack-dev-server --hot --content-base ./build",
-    "test": "npm run mocha && npm run karma",
-    "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
-    "build:dev": "node_modules/.bin/webpack -d",
-    "lint": "node_modules/.bin/tslint **/*.ts **/*.tsx --exclude node_modules/** --exclude typings/**",
-    "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/server/**/*.ts\" --colors",
-    "karma": "node_modules/.bin/karma start",
-    "karma:all": "node_modules/.bin/karma start --detectBrowsers"
   }
 }
