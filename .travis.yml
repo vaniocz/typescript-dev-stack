@@ -13,11 +13,16 @@ addons:
 
 cache:
     directories:
-        ~/.npm
+        node_modules
+
+before_install:
+    - export CHROME_BIN=chromium-browser
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
 
 script:
     - npm run lint
     - npm run mocha
-    - npm run karma:all
+    - npm run karma -- --browsers PhantomJS,ChromeTravis,Firefox
     - npm run build
     - npm run build:dev

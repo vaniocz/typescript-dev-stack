@@ -19,7 +19,7 @@
     "test": "npm run mocha && npm run karma",
     "build": "node_modules/.bin/webpack -p --optimize-occurence-order --optimize-dedupe",
     "build:dev": "node_modules/.bin/webpack -d",
-    "lint": "node_modules/.bin/tslint **/*.ts **/*.tsx --exclude node_modules/** --exclude typings/**",
+    "lint": "node_modules/.bin/tslint \"!(node_modules|typings)/**/*.ts?(x)\"",
     "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/server/**/*.ts\" --colors",
     "karma": "node_modules/.bin/karma start",
     "karma:all": "node_modules/.bin/karma start --detectBrowsers"

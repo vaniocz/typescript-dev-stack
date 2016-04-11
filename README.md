@@ -56,4 +56,3 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 - Code coverage using Istanbul
 - React and JSX examples
 - Switch to Webpack2 (Tree-shaking)
-- Travis
