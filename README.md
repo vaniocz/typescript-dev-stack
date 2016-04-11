@@ -1,4 +1,9 @@
 # TypeScript development stack
+
+[![Build Status](https://travis-ci.org/vaniocz/typescript-dev-stack.svg?branch=master)](https://travis-ci.org/vaniocz/typescript-dev-stack)
+[![Dependency Status](https://david-dm.org/vaniocz/typescript-dev-stack.svg)](https://david-dm.org/vaniocz/typescript-dev-stack)
+[![License](https://img.shields.io/badge/license-MIT-4D9283.svg)](https://github.com/vaniocz/typescript-dev-stack/blob/master/LICENSE)
+
 Development stack for building modern web applications or libraries based on webpack using modified TypeScript 1.8 together with Babel (async/await and generators in ES5).
 
 Uses TypeScript 1.8.9 with manually merged branch supporting ES7 bind operator and custom path resolving.
@@ -52,4 +57,3 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 - React and JSX examples
 - Switch to Webpack2 (Tree-shaking)
 - Travis
-
