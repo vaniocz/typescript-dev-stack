@@ -23,12 +23,6 @@ module.exports = function (config) {
             stats: {
                 colors: true
             }
-        },
-        customLaunchers: {
-            ChromeTravis: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
         }
     });
 };
