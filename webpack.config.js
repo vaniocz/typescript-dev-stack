@@ -1,10 +1,15 @@
+'use strict';
+
 const path = require('path');
+const fs = require('fs');
+const minimist = require('minimist');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const intellijKarmaReporter = require('remap-istanbul/lib/intellijKarmaReporter');
 
-const script = process.env.npm_lifecycle_event || 'build';
+const script = process.env.npm_lifecycle_event || '';
 const config = {
     entry: ['./src/index.ts'],
     output: {
@@ -12,10 +17,11 @@ const config = {
         filename: 'index.js'
     },
     resolve: {
-        root: path.resolve('./src/'),
+        root: path.resolve('./src'),
         extensions: ['', '.ts', '.js']
     },
     devtool: script === 'build' ? false : 'inline-source-map',
+    noInfo: true,
     module: {
         loaders: [
             {
@@ -41,6 +47,65 @@ if (script === 'build' || script === 'build:dev') {
     config.plugins.push(new ExtractTextPlugin('index.css'));
 } else {
     config['module'].loaders[1].loader = 'style!' + config['module'].loaders[1].loader;
+}
+
+if (script === 'build') {
+    config.plugins.push(
+        new webpack.optimize.DedupePlugin,
+        new webpack.optimize.OccurenceOrderPlugin,
+        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})
+    );
+}
+
+intellijKarmaReporter.register();
+process.env.TEST = (
+    process.env.TEST
+    || process.env.INTELLIJ_KARMA_REPORTER
+    || /[/\\](karma|_mocha|mocha-webpack)$/.test(process.argv[1])
+) ? 1 : '';
+process.env.COVERAGE = (
+    process.env.COVERAGE
+    || process.env.INTELLIJ_KARMA_REPORTER_COVERAGE
+    || script.endsWith(':coverage')
+) ? 1 : '';
+
+const argv = minimist(process.argv.slice(2));
+const scriptParts = script.split(':');
+const testContext = process.env.TEST_CONTEXT || (
+    ['browser', 'server', 'native'].indexOf(scriptParts[1]) !== -1
+        ? scriptParts[1]
+        : /[/\\](_mocha|mocha-webpack)$/.test(process.argv[1]) ? 'server' : ''
+);
+
+config.plugins.push(new webpack.DefinePlugin({
+    __PRODUCTION__: JSON.stringify(script === 'build'),
+    __DEVELOPMENT__: JSON.stringify(script !== 'build' && !process.env.TEST),
+    __TEST__: JSON.stringify(process.env.TEST),
+    __COVERAGE__: JSON.stringify(process.env.COVERAGE),
+    __TEST_CONTEXT__: JSON.stringify(testContext),
+    __GREP__: (argv.grep || process.env.GREP) ? new RegExp((argv.grep || process.env.GREP).trim()).toString() : 'null'
+}));
+
+if (process.env.TEST) {
+    config.target = 'node';
+    config.plugins.push(new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+    }));
+}
+
+if (process.env.COVERAGE) {
+    config.module.postLoaders = [{
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules[/\\]|tests[/\\]/,
+        loader: 'remap-istanbul/lib/webpackInstrumenterLoader'
+    }];
+}
+
+if (script === 'mocha:coverage') {
+    process.env.ISTANBUL_REPORTERS = 'json=build/coverage/mocha/coverage.json';
+    process.env.REMAP_ISTANBUL_REPORTERS = 'text-summary,lcovonly=build/coverage/mocha/lcov.info,html=build/coverage/mocha/html';
 }
 
 module.exports = config;

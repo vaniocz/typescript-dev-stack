@@ -23,7 +23,6 @@
         "no-duplicate-variable": true,
         "no-empty": true,
         "no-internal-module": true,
-        "no-require-imports": true,
         "no-shadowed-variable": true,
         "no-string-literal": true,
         "no-unreachable": true,
