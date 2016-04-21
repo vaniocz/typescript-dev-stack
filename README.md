@@ -16,7 +16,7 @@ It tries current directory before trying `node_modules` and `src` while traversi
 - `npm run build -s` - builds bundle for production
 - `npm run build:dev -s` - builds bundle for development
 - `npm run karma -s` - runs all tests using karma & mocha in Electron
-- `npm run karma:all -s` - runs tests inside `tests/browser` directory using karma & mocha in all detected browsers
+- `npm run karma:browser:all -s` - runs tests inside `tests/browser` directory using karma & mocha in all detected browsers
 - `npm run karma:coverage -s` - runs all tests using karma & mocha in Electron and outputs coverage
 - `npm run karma:browser:coverage -s` - runs tests inside `tests/browser` directory using karma & mocha in Electron and outputs coverage
 - `npm run karma:server:coverage -s` - runs tests inside `tests/server` directory using karma & mocha in Electron and outputs coverage
@@ -72,6 +72,5 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 ![screenshot from NetBeans](https://i.imgsafe.org/0a2c943.png)
 
 ### TODO
-- Some shitty mocking lib
 - React and JSX examples
 - Switch to Webpack2 (Tree-shaking)

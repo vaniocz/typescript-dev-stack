@@ -25,10 +25,10 @@
     "karma": "node_modules/.bin/karma start",
     "karma:browser": "node_modules/.bin/karma start",
     "karma:server": "node_modules/.bin/karma start",
+    "karma:browser:all": "node_modules/.bin/karma start --detectBrowsers",
     "karma:coverage": "node_modules/.bin/karma start",
     "karma:browser:coverage": "node_modules/.bin/karma start",
-    "karma:server:coverage": "node_modules/.bin/karma start",
-    "karma:browser:all": "node_modules/.bin/karma start --detectBrowsers"
+    "karma:server:coverage": "node_modules/.bin/karma start"
   },
   "engines": {
     "node": ">=4"
@@ -52,6 +52,7 @@
     "css-loader": "^0.23.1",
     "electron-prebuilt": "^0.37.6",
     "extract-text-webpack-plugin": "^1.0.1",
+    "imports-loader": "^0.6.5",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.3",
     "karma-coverage": "^0.5.5",
@@ -72,6 +73,7 @@
     "mocha-webpack": "^0.3.0",
     "postcss-loader": "^0.8.2",
     "remap-istanbul": "https://github.com/maryo/remap-istanbul/tarball/master",
+    "sinon": "^1.17.3",
     "style-loader": "^0.13.1",
     "tslint": "^3.7.1",
     "tslint-microsoft-contrib": "^2.0.2",

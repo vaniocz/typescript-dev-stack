@@ -18,7 +18,10 @@ const config = {
     },
     resolve: {
         root: path.resolve('./src'),
-        extensions: ['', '.ts', '.js']
+        extensions: ['', '.ts', '.js'],
+        alias: {
+            sinon: __dirname + '/node_modules/sinon/pkg/sinon.js'
+        }
     },
     devtool: script === 'build' ? false : 'inline-source-map',
     noInfo: true,
@@ -30,6 +33,9 @@ const config = {
             }, {
                 test: /\.less$/,
                 loader: script === 'build' ? 'css!postcss!less' : 'css?sourceMap!postcss!less?sourceMap'
+            }, {
+                test: /sinon\.js$/,
+                loader: 'imports?require=>false'
             }
         ]
     },
