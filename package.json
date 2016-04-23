@@ -20,21 +20,21 @@
     "url": "git://github.com/vaniocz/typescript-dev-stack.git"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/typings install",
-    "start": "node_modules/.bin/webpack-dev-server --hot --content-base ./build",
+    "postinstall": "typings install",
+    "start": "webpack-dev-server --hot --content-base ./build",
     "test": "npm run mocha && npm run karma",
-    "build": "node_modules/.bin/webpack",
-    "build:dev": "node_modules/.bin/webpack -d",
-    "lint": "node_modules/.bin/tslint \"!(node_modules|typings)/**/*.ts?(x)\"",
-    "mocha": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/runner.js\" --colors",
-    "mocha:coverage": "node_modules/.bin/mocha-webpack --webpack-config webpack.config.js \"tests/runner.js\" -R mocha-multi --reporter-options spec=-,remap-istanbul/lib/mochaRemapIstanbul=- --colors",
-    "karma": "node_modules/.bin/karma start",
-    "karma:browser": "node_modules/.bin/karma start",
-    "karma:server": "node_modules/.bin/karma start",
-    "karma:browser:all": "node_modules/.bin/karma start --detectBrowsers",
-    "karma:coverage": "node_modules/.bin/karma start",
-    "karma:browser:coverage": "node_modules/.bin/karma start",
-    "karma:server:coverage": "node_modules/.bin/karma start"
+    "build": "webpack",
+    "build:dev": "webpack -d",
+    "lint": "tslint \"!(node_modules|typings)/**/*.ts?(x)\"",
+    "mocha": "mocha-webpack --webpack-config webpack.config.js \"tests/runner.js\" --colors",
+    "mocha:coverage": "mocha-webpack --webpack-config webpack.config.js \"tests/runner.js\" -R mocha-multi --reporter-options spec=-,remap-istanbul/lib/mochaRemapIstanbul=- --colors",
+    "karma": "karma start",
+    "karma:browser": "karma start",
+    "karma:server": "karma start",
+    "karma:browser:all": "karma start --detectBrowsers",
+    "karma:coverage": "karma start",
+    "karma:browser:coverage": "karma start",
+    "karma:server:coverage": "karma start"
   },
   "engines": {
     "node": ">=4"
