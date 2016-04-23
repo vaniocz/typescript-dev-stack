@@ -15,7 +15,7 @@ export default class Greeter
     @log
     public greet(foo: string = 'bar'): string
     {
-        const text = `${this.greeting} ${Bar.world()}!`;
+        const text = `${this.greeting} ${Bar.world()} using jQuery!`;
         const log = ::console.log; // ES7 bind operator!
         $('#hello').html(text);
         log(text);

@@ -6,7 +6,7 @@ try {
 } catch (e) {}
 
 if (__COVERAGE__ && !__GREP__) {
-    const srcContext = require.context('../src', true, /^(?!.*index\.ts$).*\.tsx?$/);
+    const srcContext = require.context('../src', true, /^(?!.*index\.tsx?$).*\.tsx?$/);
     srcContext.keys().forEach(srcContext);
 }
 

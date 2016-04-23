@@ -8,24 +8,25 @@ Development stack for building modern web applications or libraries based on web
 
 Uses TypeScript 1.8.9 with manually merged branch supporting ES7 bind operator and custom path resolving.
 It tries current directory before trying `node_modules` and `src` while traversing up the directory tree.
+Uses Mocha, Karma and Sinon for testing, includes jQuery and React with React Hot Loader and LESS for styling.
 
 - `npm install` - installs all dependencies
 - `npm start` - starts webpack dev server (hot module replacement enabled)
-- `npm test` - runs all tests using karma & mocha in Electron and also tests inside `tests/server` directory using mocha in Node.js environment
+- `npm test` - runs all tests using Karma & Mocha in Electron and also tests inside `tests/server` directory using Mocha in Node.js environment
 - `npm run lint -s` - validates all TypeScript files using tslint
 - `npm run build -s` - builds bundle for production
 - `npm run build:dev -s` - builds bundle for development
-- `npm run karma -s` - runs all tests using karma & mocha in Electron
-- `npm run karma:browser:all -s` - runs tests inside `tests/browser` directory using karma & mocha in all detected browsers
-- `npm run karma:coverage -s` - runs all tests using karma & mocha in Electron and outputs coverage
-- `npm run karma:browser:coverage -s` - runs tests inside `tests/browser` directory using karma & mocha in Electron and outputs coverage
-- `npm run karma:server:coverage -s` - runs tests inside `tests/server` directory using karma & mocha in Electron and outputs coverage
-- `npm run karma -s -- --grep browser/browserTest\.ts` - runs `tests/browser/browserTest.ts` test file using karma & mocha in Electron
-- `npm run mocha -s` - runs tests inside `tests/server` directory using mocha in Node.js environment
-- `npm run mocha:coverage -s` - runs tests inside `tests/server` directory using mocha in Node.js environment and outputs coverage
-- `GREP=serverTest\.ts && npm run mocha -s` - runs `tests/server/serverTest.ts` test file using mocha in Node.js environment
+- `npm run karma -s` - runs all tests using Karma & Mocha in Electron
+- `npm run karma:browser:all -s` - runs tests inside `tests/browser` directory using Karma & Mocha in all detected browsers
+- `npm run karma:coverage -s` - runs all tests using Karma & Mocha in Electron and outputs coverage
+- `npm run karma:browser:coverage -s` - runs tests inside `tests/browser` directory using Karma & Mocha in Electron and outputs coverage
+- `npm run karma:server:coverage -s` - runs tests inside `tests/server` directory using Karma & Mocha in Electron and outputs coverage
+- `npm run karma -s -- --grep browser/browserTest\.ts` - runs `tests/browser/browserTest.ts` test file using Karma & Mocha in Electron
+- `npm run mocha -s` - runs tests inside `tests/server` directory using Mocha in Node.js environment
+- `npm run mocha:coverage -s` - runs tests inside `tests/server` directory using Mocha in Node.js environment and outputs coverage
+- `GREP=serverTest\.ts && npm run Mocha -s` - runs `tests/server/serverTest.ts` test file using Mocha in Node.js environment
 
-Check an example of [code coverage output](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vaniocz/typescript-dev-stack/master/build/coverage/karma/html/index.html).
+Check an example of [code coverage output](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vaniocz/typescript-dev-stack/master/build/coverage/Karma/html/index.html).
 It is remapped using my fork of [remap-istanbul](https://github.com/maryo/remap-istanbul) which contains some hacks
 which enables remapping of Istanbul code coverage processed by webpack even for JetBrains IDEs.
 
@@ -72,5 +73,4 @@ That's also why the `index.ts` file contains a reference to reflect-metadata typ
 ![screenshot from NetBeans](https://i.imgsafe.org/0a2c943.png)
 
 ### TODO
-- React and JSX examples
 - Switch to Webpack2 (Tree-shaking)
