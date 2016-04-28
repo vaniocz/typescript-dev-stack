@@ -26,7 +26,7 @@ Uses Mocha, Karma and Sinon for testing, includes jQuery and React with React Ho
 - `npm run mocha:coverage -s` - runs tests inside `tests/server` directory using Mocha in Node.js environment and outputs coverage
 - `GREP=serverTest\.ts && npm run Mocha -s` - runs `tests/server/serverTest.ts` test file using Mocha in Node.js environment
 
-Check an example of [code coverage output](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vaniocz/typescript-dev-stack/master/build/coverage/Karma/html/index.html).
+Check an example of [code coverage output](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vaniocz/typescript-dev-stack/master/build/coverage/karma/html/index.html).
 It is remapped using my fork of [remap-istanbul](https://github.com/maryo/remap-istanbul) which contains some hacks
 which enables remapping of Istanbul code coverage processed by webpack even for JetBrains IDEs.
 
