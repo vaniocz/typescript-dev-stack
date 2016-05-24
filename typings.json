@@ -1,17 +1,15 @@
 {
-  "ambientDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20160316155526",
+  "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160415060238",
+    "lodash": "registry:npm/lodash#4.0.0+20160416211519",
+    "sinon": "registry:npm/sinon#1.16.0+20160427193336"
+  },
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "react": "registry:dt/react#0.14.0+20160423065914",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "webpack-env": "registry:dt/webpack-env#1.12.2+20160316155526",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160412133644"
-  },
-  "dependencies": {
-    "lodash": "registry:npm/lodash#4.0.0+20160416211519",
-    "sinon": "registry:npm/sinon#1.16.0+20160309002336"
-  },
-  "devDependencies": {
-    "chai": "registry:npm/chai#3.5.0+20160415060238"
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
   }
 }

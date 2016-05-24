@@ -14,5 +14,5 @@
         "cacheDirectory": ".tmp/awesome-typescript-loader",
         "useBabel": true
     },
-    "exclude": ["node_modules", "typings/browser", "typings/main", "typings/browser.d.ts"]
+    "exclude": ["node_modules", "typings/globals", "typings/modules"]
 }
