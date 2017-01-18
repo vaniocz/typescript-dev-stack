@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "jsx": "react",
         "noImplicitAny": true,
         "removeComments": true,
         "newLine": "LF",
-        "outDir": ".tmp/typescript"
+        "outDir": ".tmp/typescript",
+        "baseUrl": "src",
+        "lib": ["dom", "es6", "scripthost"]
     },
     "awesomeTypescriptLoaderOptions": {
-        "useCache": true,
-        "cacheDirectory": ".tmp/awesome-typescript-loader",
-        "useBabel": true
+        "cacheDirectory": ".tmp/awesome-typescript-loader"
     },
-    "exclude": ["node_modules", "typings/globals", "typings/modules"]
+    "exclude": ["node_modules"]
 }

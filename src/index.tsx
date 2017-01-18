@@ -1,6 +1,5 @@
 /// <reference path="../node_modules/reflect-metadata/reflect-metadata.d.ts" /> NetBeans TypeScript plugin bug
 
-import 'babel-polyfill';
 import 'whatwg-fetch';
 import 'reflect-metadata';
 import * as React from 'react';
@@ -8,7 +7,7 @@ import * as ReactDOM from 'react-dom';
 import Greeter from 'foo/Greeter';
 import Hello from 'components/Hello';
 
-import 'index.less';
+import 'index.scss';
 
 const foo = new Greeter;
 const metadataValue = Reflect.getMetadata('myClassMetadata', Greeter);

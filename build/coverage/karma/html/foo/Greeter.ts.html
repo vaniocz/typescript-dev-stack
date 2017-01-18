@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for foo\Greeter.ts</title>
+    <title>Code coverage report for foo/Greeter.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.86% </span>
+        <span class="strong">47.37% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/14</span>
+        <span class='fraction'>9/19</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">25% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>1/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">46.15% </span>
+        <span class="strong">43.75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/13</span>
+        <span class='fraction'>7/16</span>
       </div>
     </div>
   </div>
@@ -79,19 +79,19 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -100,13 +100,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Bar from 'bar/Bar';
 import log from 'bar/log';
 import myClassMetadata from 'bar/myClassMetadata';
@@ -116,27 +116,27 @@ export default class Greeter
 {
     private greeting: string;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    public constructor(greeting: string = 'Hello')</span>
+    public constructor(<span class="cstat-no" title="statement not covered" >greeting: string = 'Hello'<span class="fstat-no" title="function not covered" >)</span></span>
     {
-<span class="cstat-no" title="statement not covered" >        this.greeting = g</span>reeting;
+<span class="cstat-no" title="statement not covered" >        this.greeting = greeting;</span>
     }
 &nbsp;
     @log
-    public greet(foo: string = 'bar'): string
+    public greet(<span class="cstat-no" title="statement not covered" >foo: string = 'bar'<span class="fstat-no" title="function not covered" >)</span>: string</span>
     {
-<span class="cstat-no" title="statement not covered" >        const text = `${this.greeting} ${Bar.w</span>orld()} using jQuery!`;
-<span class="cstat-no" title="statement not covered" >        const log = ::console.log;</span> // ES7 bind operator!
-<span class="cstat-no" title="statement not covered" >        $('#hello').html(t</span>ext);
-<span class="cstat-no" title="statement not covered" >        log(t</span>ext);
+        const text = `${<span class="cstat-no" title="statement not covered" >this.greeting} ${Bar.world()} using jQuery!`;</span>
+        const log = <span class="cstat-no" title="statement not covered" >console.log.bind(console.log);</span>
+<span class="cstat-no" title="statement not covered" >        $('#hello').html(text);</span>
+<span class="cstat-no" title="statement not covered" >        log(text);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return t</span>ext;
+<span class="cstat-no" title="statement not covered" >        return text;</span>
     }
 &nbsp;
-    public async testAsync(): Promise&lt;string&gt;
+<span class="fstat-no" title="function not covered" >    public async testAsync(): Promise&lt;string&gt;</span>
     {
-<span class="cstat-no" title="statement not covered" >        const <span class="cstat-no" title="statement not covered" >response = await fetch('/index.html'); // async/await transpiles to ES5 using Babel!</span></span>
+        const response = <span class="cstat-no" title="statement not covered" >await fetch('/index.html');</span>
 &nbsp;
-        return response.text();
+<span class="cstat-no" title="statement not covered" >        return response.text();</span>
     }
 }
 &nbsp;</pre></td></tr>
@@ -145,7 +145,7 @@ export default class Greeter
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 23 2016 18:22:02 GMT+0200 (Střední Evropa (letní čas))
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jan 18 2017 22:53:43 GMT+0100 (CET)
 </div>
 </div>
 <script src="../prettify.js"></script>

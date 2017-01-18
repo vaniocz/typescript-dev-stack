@@ -16,7 +16,7 @@ export default class Greeter
     public greet(foo: string = 'bar'): string
     {
         const text = `${this.greeting} ${Bar.world()} using jQuery!`;
-        const log = ::console.log; // ES7 bind operator!
+        const log = console.log.bind(console.log);
         $('#hello').html(text);
         log(text);
 
@@ -25,7 +25,7 @@ export default class Greeter
 
     public async testAsync(): Promise<string>
     {
-        const response = await fetch('/index.html'); // async/await transpiles to ES5 using Babel!
+        const response = await fetch('/index.html');
 
         return response.text();
     }

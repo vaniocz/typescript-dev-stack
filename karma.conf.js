@@ -1,9 +1,9 @@
 process.env.TEST = true;
 
+const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
-const karmaRemapIstanbul = require('remap-istanbul/lib/karmaRemapIstanbul');
+const webpackConfig = require(path.resolve(__dirname, 'webpack.config'));
 
 module.exports = (config) => {
     const options = {
@@ -34,24 +34,20 @@ module.exports = (config) => {
             'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-ie-launcher',
-            karmaRemapIstanbul
+            'karma-remap-coverage'
         ]
     };
 
     if (process.env.COVERAGE) {
-        options.reporters.push('coverage', 'karma-remap-istanbul');
+        options.reporters.push('coverage', 'remap-coverage');
         options.coverageReporter = {
-            dir: 'build/coverage/karma',
-            reporters: [{type : 'json', subdir : '.', file : 'coverage.json'}]
+            type: 'in-memory'
         };
-        options.remapIstanbulReporter = {
-            src: 'build/coverage/karma/coverage.json',
-            timeoutNoMoreFiles: 20000,
-            reports: {
-                lcovonly: 'build/coverage/karma/lcov.info',
-                html: 'build/coverage/karma/html',
-                'text-summary': false
-            }
+        options.remapCoverageReporter = {
+            'text-summary': null,
+            lcovonly: path.resolve(__dirname, 'build/coverage/karma/lcov.info'),
+            json: path.resolve(__dirname, 'build/coverage/karma/coverage.json'),
+            html: path.resolve(__dirname, 'build/coverage/karma/html')
         };
 
         if (process.env.INTELLIJ_KARMA_REPORTER_COVERAGE) {

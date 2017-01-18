@@ -4,55 +4,54 @@ const path = require('path');
 const fs = require('fs');
 const minimist = require('minimist');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
-const intellijKarmaReporter = require('remap-istanbul/lib/intellijKarmaReporter');
 
 const script = process.env.npm_lifecycle_event || '';
 const config = {
-    entry: {index: './src/index.tsx'},
+    entry: {index: path.resolve(__dirname, 'src/index.tsx')},
     output: {
-        path: __dirname + '/build',
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
         chunkFilename: '[name].js'
     },
     resolve: {
-        root: path.resolve('./src'),
-        extensions: ['', '.ts', '.tsx', '.js'],
+        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+        extensions: ['.ts', '.tsx', '.js'],
         alias: {
-            sinon: __dirname + '/node_modules/sinon/pkg/sinon.js'
+            sinon: path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js')
         }
     },
     devtool: script === 'build' ? false : 'inline-source-map',
-    noInfo: true,
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader'
+                use: 'awesome-typescript-loader'
             }, {
-                test: /\.less$/,
-                loader: script === 'build' ? 'css!postcss!less' : 'css?sourceMap!postcss!less?sourceMap'
+                test: /\.scss$/,
+                use: [
+                    {loader: 'css-loader', options: {sourceMap: script !== 'build'}},
+                    {loader: 'postcss-loader'},
+                    {loader: 'sass-loader', options: {sourceMap: script !== 'build'}}
+                ]
             }, {
                 test: /sinon\.js$/,
-                loader: 'imports?require=>false'
+                use: 'imports-loader?require=>false'
             }
         ]
     },
     plugins: [new CopyWebpackPlugin([
-        {from: 'node_modules/jquery/dist/jquery.min.js'},
-        {from: 'node_modules/lodash/lodash.min.js'},
-        {from: 'node_modules/react/dist/react.min.js'},
-        {from: 'node_modules/react-dom/dist/react-dom.min.js'}
+        {from: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js')},
+        {from: path.resolve(__dirname, 'node_modules/lodash/lodash.min.js')},
+        {from: path.resolve(__dirname, 'node_modules/react/dist/react.min.js')},
+        {from: path.resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')}
     ])],
     devServer: {
         historyApiFallback: {index: '/dev-server.html'},
-        inline: true,
-        stats: 'errors-only'
-    },
-    postcss: () => [autoprefixer({browsers: 'last 2 versions'})]
+        noInfo: true
+    }
 };
 
 if (script === 'build' || script === 'build:dev') {
@@ -62,7 +61,9 @@ if (script === 'build' || script === 'build:dev') {
         react: 'React',
         'react-dom': 'ReactDOM'
     };
-    config['module'].loaders[1].loader = ExtractTextPlugin.extract(config['module'].loaders[1].loader);
+
+    config.module.rules[1].use.loader = ExtractTextPlugin.extract(config.module.rules[1].use);
+
     config.plugins.push(
         new SplitByPathPlugin([{
             name: 'vendor',
@@ -71,13 +72,11 @@ if (script === 'build' || script === 'build:dev') {
         new ExtractTextPlugin('index.css')
     );
 } else {
-    config['module'].loaders[1].loader = 'style!' + config['module'].loaders[1].loader;
+    config.module.rules[1].use.unshift('style-loader');
 }
 
 if (script === 'build') {
     config.plugins.push(
-        new webpack.optimize.DedupePlugin,
-        new webpack.optimize.OccurenceOrderPlugin,
         new webpack.optimize.UglifyJsPlugin({
             comments: false,
             compress: {warnings: false}
@@ -85,7 +84,6 @@ if (script === 'build') {
     );
 }
 
-intellijKarmaReporter.register();
 process.env.TEST = (
     process.env.TEST
     || process.env.INTELLIJ_KARMA_REPORTER
@@ -124,16 +122,17 @@ if (process.env.TEST) {
 }
 
 if (process.env.COVERAGE) {
-    config.module.postLoaders = [{
+    config.module.rules.push({
         test: /\.[jt]sx?$/,
         exclude: /node_modules[/\\]|tests[/\\]/,
-        loader: 'remap-istanbul/lib/webpackInstrumenterLoader'
-    }];
+        use: 'istanbul-instrumenter-loader',
+        enforce: 'post'
+    });
 }
 
 if (script === 'mocha:coverage') {
-    process.env.ISTANBUL_REPORTERS = 'json=build/coverage/mocha/coverage.json';
-    process.env.REMAP_ISTANBUL_REPORTERS = 'text-summary,lcovonly=build/coverage/mocha/lcov.info,html=build/coverage/mocha/html';
+    process.env.ISTANBUL_REPORTERS = 'text-summary,lcovonly,html';
+    process.env.ISTANBUL_REPORT_DIR = path.resolve(__dirname, 'build/coverage/mocha/html');
 }
 
 module.exports = config;
