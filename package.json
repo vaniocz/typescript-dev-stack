@@ -84,6 +84,7 @@
     "mocha": "^3.2.0",
     "mocha-multi": "^0.10.0",
     "mocha-remap-istanbul": "^0.1.0",
+    "mocha-typescript": "^1.0.15",
     "mocha-webpack": "^1.0.0-beta",
     "node-sass": "^4.3.0",
     "postcss-loader": "^1.2.2",

@@ -3241,6 +3241,38 @@
       "resolved": "https://registry.npmjs.org/mocha-remap-istanbul/-/mocha-remap-istanbul-0.1.0.tgz",
       "dev": true
     },
+    "mocha-typescript": {
+      "version": "1.0.15",
+      "from": "mocha-typescript@latest",
+      "resolved": "https://registry.npmjs.org/mocha-typescript/-/mocha-typescript-1.0.15.tgz",
+      "dev": true,
+      "dependencies": {
+        "camelcase": {
+          "version": "3.0.0",
+          "from": "camelcase@>=3.0.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/camelcase/-/camelcase-3.0.0.tgz",
+          "dev": true
+        },
+        "cliui": {
+          "version": "3.2.0",
+          "from": "cliui@>=3.2.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/cliui/-/cliui-3.2.0.tgz",
+          "dev": true
+        },
+        "yargs": {
+          "version": "6.6.0",
+          "from": "yargs@>=6.5.0 <7.0.0",
+          "resolved": "https://registry.npmjs.org/yargs/-/yargs-6.6.0.tgz",
+          "dev": true
+        },
+        "yargs-parser": {
+          "version": "4.2.1",
+          "from": "yargs-parser@>=4.2.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-4.2.1.tgz",
+          "dev": true
+        }
+      }
+    },
     "mocha-webpack": {
       "version": "1.0.0-beta.1",
       "from": "mocha-webpack@>=1.0.0-beta <2.0.0",
