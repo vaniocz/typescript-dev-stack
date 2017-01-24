@@ -4,7 +4,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Greeter from 'foo/Greeter';
 import Hello from 'components/Hello';
-
 import 'index.scss';
 
 const foo = new Greeter;

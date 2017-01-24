@@ -5,8 +5,12 @@ try {
     require('module').globalPaths.push('./node_modules');
 } catch (e) {}
 
+if (typeof global === 'undefined') {
+    window.global = window;
+}
+
 if (__COVERAGE__ && !__GREP__) {
-    const srcContext = require.context('../src', true, /^(?!.*index\.tsx?$).*\.[jt]sx?$/);
+    const srcContext = require.context('../src', true, /^(?!.*(index\.tsx?|\.d.ts)$).*\.[jt]sx?$/);
     srcContext.keys().forEach(srcContext);
 }
 

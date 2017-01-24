@@ -1,9 +1,9 @@
-import * as _ from 'lodash';
+import {upperCase} from 'lodash';
 
 export default class Bar
 {
     public static world(): string
     {
-        return _.upperCase('world');
+        return upperCase('world');
     }
 }
