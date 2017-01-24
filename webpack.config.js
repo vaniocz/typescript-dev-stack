@@ -10,9 +10,10 @@ const SplitByPathPlugin = require('webpack-split-by-path');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const script = process.env.npm_lifecycle_event || '';
+const sinonPath = path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js');
 const config = {
     entry: {
-        index: path.resolve(__dirname, 'src/index.tsx'),
+        index: path.resolve(__dirname, 'src/index.ts'),
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -23,7 +24,7 @@ const config = {
         modules: [path.resolve(__dirname, 'src'), 'node_modules'],
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
-            sinon: path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js'),
+            sinon: sinonPath,
         },
     },
     devtool: script === 'build' ? false : 'inline-source-map',
@@ -38,31 +39,28 @@ const config = {
                     ? 'css-loader!postcss-loader!sass-loader'
                     : 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
             }, {
-                test: /sinon\.js$/,
+                test: /\.html$/,
+                loader: 'exports-loader?exports!exports-loader?default=module.exports!vue-template-loader',
+            }, {
+                test: sinonPath,
                 use: 'imports-loader?require=>false',
             },
         ],
     },
     plugins: [
         new CopyWebpackPlugin([
-            {from: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js')},
-            {from: path.resolve(__dirname, 'node_modules/lodash/lodash.min.js')},
-            {from: path.resolve(__dirname, 'node_modules/react/dist/react.min.js')},
-            {from: path.resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')},
+            {from: path.resolve(__dirname, 'node_modules/vue/dist/vue.min.js')},
         ]),
     ],
     devServer: {
-        historyApiFallback: {index: '/dev-server.html'},
+        historyApiFallback: {index: '/index.html'},
         noInfo: true,
     }
 };
 
 if (script === 'build' || script === 'build:dev') {
     config.externals = {
-        jquery: 'jQuery',
-        lodash: '_',
-        react: 'React',
-        'react-dom': 'ReactDOM',
+        vue: 'Vue',
     };
     config.module.rules[1].loader = ExtractTextPlugin.extract(config.module.rules[1].loader);
     config.plugins.push(new ExtractTextPlugin('index.css'));
