@@ -27,10 +27,9 @@ Uses Mocha, Karma and Sinon for testing, includes jQuery and React with React Ho
 - `GREP=serverTest\.ts && npm run Mocha -s` - runs `tests/server/serverTest.ts` test file using Mocha in Node.js environment
 
 Check an example of [code coverage output](https://htmlpreview.github.io/?https://raw.githubusercontent.com/vaniocz/typescript-dev-stack/master/build/coverage/karma/html/index.html).
-It is remapped using my fork of [remap-istanbul](https://github.com/maryo/remap-istanbul) which contains some hacks
-which enables remapping of Istanbul code coverage processed by webpack even for JetBrains IDEs.
+It also contains few hacks to enable remapping of Istanbul code coverage processed by webpack even for JetBrains IDEs.
 
-![screenshot from Chrome](https://i.imgsafe.org/09409a2.png)
+![screenshot from Chrome](http://i.imgsafe.org/6a90565324.png)
 You should prefer Chrome since FF does not handle source maps correctly.
 
 ## IDE support
@@ -43,7 +42,7 @@ Even code coverage reporting remapped using Istanbul works quite well when confi
 Depending on the version and settings you might also need to turn off JavaScript inspections for `.ts` files.
 It also looks like it has sometimes problem while resolving files for autocompletion.
 
-![screenshot from PHPStorm](https://i.imgsafe.org/29a49d7.png)
+![screenshot from PHPStorm](http://i.imgsafe.org/6a9067548e.png)
 
 ### Atom
 One of the best solutions thanks to wonderful plugin atom-typescript https://atom.io/packages/atom-typescript.
@@ -51,12 +50,7 @@ There is also a great plugin https://atom.io/packages/lcov-info for displaying c
 You just have to modify the path of the lcov this plugin is searching in.
 The resolving logic is in `.atom/packages/lcov-info/lib/coverage-lcov.coffee` inside your profile folder.
 
-![screenshot from Atom](https://i.imgsafe.org/3376551.png)
+![screenshot from Atom](http://i.imgsafe.org/6a9041f382.png)
 
 ### VS Code
 Works fine.
-
-### NetBeans
-Also works almost fine after installing this plugin - http://plugins.netbeans.org/plugin/60605/typescript-editor
-
-![screenshot from NetBeans](https://i.imgsafe.org/0a2c943.png)

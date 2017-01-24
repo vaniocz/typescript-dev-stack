@@ -1,5 +1,3 @@
-/// <reference path="../node_modules/reflect-metadata/reflect-metadata.d.ts" /> NetBeans TypeScript plugin bug
-
 import 'whatwg-fetch';
 import 'reflect-metadata';
 import * as React from 'react';
@@ -17,5 +15,5 @@ console.log(`metadata value: ${metadataValue}`);
 
 ReactDOM.render(
     <Hello who="world" using="React" />,
-    document.getElementById('reactRoot')
+    document.getElementById('reactRoot'),
 );

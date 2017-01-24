@@ -7,50 +7,53 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const script = process.env.npm_lifecycle_event || '';
 const config = {
-    entry: {index: path.resolve(__dirname, 'src/index.tsx')},
+    entry: {
+        index: path.resolve(__dirname, 'src/index.tsx'),
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
-        chunkFilename: '[name].js'
+        chunkFilename: '[name].js',
     },
     resolve: {
         modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
-            sinon: path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js')
-        }
+            sinon: path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js'),
+        },
     },
     devtool: script === 'build' ? false : 'inline-source-map',
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'awesome-typescript-loader'
+                use: 'awesome-typescript-loader',
             }, {
                 test: /\.scss$/,
-                use: [
-                    {loader: 'css-loader', options: {sourceMap: script !== 'build'}},
-                    {loader: 'postcss-loader'},
-                    {loader: 'sass-loader', options: {sourceMap: script !== 'build'}}
-                ]
+                loader: script === 'build'
+                    ? 'css-loader!postcss-loader!sass-loader'
+                    : 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
             }, {
                 test: /sinon\.js$/,
-                use: 'imports-loader?require=>false'
-            }
-        ]
+                use: 'imports-loader?require=>false',
+            },
+        ],
     },
-    plugins: [new CopyWebpackPlugin([
-        {from: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js')},
-        {from: path.resolve(__dirname, 'node_modules/lodash/lodash.min.js')},
-        {from: path.resolve(__dirname, 'node_modules/react/dist/react.min.js')},
-        {from: path.resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')}
-    ])],
+    plugins: [
+        new CopyWebpackPlugin([
+            {from: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js')},
+            {from: path.resolve(__dirname, 'node_modules/lodash/lodash.min.js')},
+            {from: path.resolve(__dirname, 'node_modules/react/dist/react.min.js')},
+            {from: path.resolve(__dirname, 'node_modules/react-dom/dist/react-dom.min.js')},
+        ]),
+    ],
     devServer: {
         historyApiFallback: {index: '/dev-server.html'},
-        noInfo: true
+        noInfo: true,
     }
 };
 
@@ -59,31 +62,21 @@ if (script === 'build' || script === 'build:dev') {
         jquery: 'jQuery',
         lodash: '_',
         react: 'React',
-        'react-dom': 'ReactDOM'
+        'react-dom': 'ReactDOM',
     };
-
-    config.module.rules[1].use.loader = ExtractTextPlugin.extract(config.module.rules[1].use);
-
-    config.plugins.push(
-        new SplitByPathPlugin([{
-            name: 'vendor',
-            path: path.join(__dirname, 'node_modules')
-        }]),
-        new ExtractTextPlugin('index.css')
-    );
+    config.module.rules[1].loader = ExtractTextPlugin.extract(config.module.rules[1].loader);
+    config.plugins.push(new ExtractTextPlugin('index.css'));
 } else {
-    config.module.rules[1].use.unshift('style-loader');
+    config.module.rules[1].loader = 'style-loader!' + config.module.rules[1].loader;
 }
 
 if (script === 'build') {
-    config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            comments: false,
-            compress: {warnings: false}
-        })
-    );
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({comments: false, compress: {warnings: false}}));
+} else if (script === 'start') {
+    config.plugins.push(new WebpackNotifierPlugin({alwaysNotify: true}));
 }
 
+setupIntellijKarmaReporter();
 process.env.TEST = (
     process.env.TEST
     || process.env.INTELLIJ_KARMA_REPORTER
@@ -109,7 +102,8 @@ config.plugins.push(new webpack.DefinePlugin({
     __TEST__: JSON.stringify(process.env.TEST),
     __COVERAGE__: JSON.stringify(process.env.COVERAGE),
     __TEST_CONTEXT__: JSON.stringify(testContext),
-    __GREP__: (argv.grep || process.env.GREP) ? new RegExp((argv.grep || process.env.GREP).trim()).toString() : 'null'
+    __GREP__: (argv.grep || process.env.GREP) ? new RegExp((argv.grep || process.env.GREP).trim()).toString() : 'null',
+    'process.env.NODE_ENV': '"production"',
 }));
 
 if (process.env.TEST) {
@@ -117,8 +111,13 @@ if (process.env.TEST) {
     config.plugins.push(new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
-        'window.jQuery': 'jquery'
+        'window.jQuery': 'jquery',
     }));
+} else {
+    config.plugins.push(new SplitByPathPlugin([{
+        name: 'vendor',
+        path: path.join(__dirname, 'node_modules'),
+    }]));
 }
 
 if (process.env.COVERAGE) {
@@ -126,13 +125,33 @@ if (process.env.COVERAGE) {
         test: /\.[jt]sx?$/,
         exclude: /node_modules[/\\]|tests[/\\]/,
         use: 'istanbul-instrumenter-loader',
-        enforce: 'post'
+        enforce: 'post',
     });
 }
 
 if (script === 'mocha:coverage') {
-    process.env.ISTANBUL_REPORTERS = 'text-summary,lcovonly,html';
-    process.env.ISTANBUL_REPORT_DIR = path.resolve(__dirname, 'build/coverage/mocha/html');
+    process.env.ISTANBUL_REPORTERS = 'json=build/coverage/mocha/coverage.json';
+    process.env.REMAP_ISTANBUL_REPORTERS = 'text-summary,lcovonly=build/coverage/mocha/lcov.info,html=build/coverage/mocha/html';
+}
+
+function setupIntellijKarmaReporter()
+{
+    const intellijServerModulePath = 'plugins/js-karma/js_reporter/karma-intellij/lib/intellijServer.js';
+
+    if (process.argv[1] && process.argv[1].endsWith(path.normalize(intellijServerModulePath))) {
+        process.env.INTELLIJ_KARMA_REPORTER = true;
+        process.env.INTELLIJ_KARMA_REPORTER_COVERAGE = process.argv.join(' ').includes('--coverageTempDir=');
+
+        if (process.env.INTELLIJ_KARMA_REPORTER_COVERAGE) {
+            const intellijCliModulePath = process.argv[1].replace(/intellijServer\.js$/, 'intellijCli.js');
+            const intellijCliModule = require(intellijCliModulePath);
+
+            intellijCliModule.getBrowsers = () => [];
+            intellijCliModule.getCoverageTempDirPath = () => {
+                return path.join(__dirname, '.tmp/intellij-coverage');
+            };
+        }
+    }
 }
 
 module.exports = config;

@@ -6,9 +6,9 @@ try {
 } catch (e) {}
 
 if (__COVERAGE__ && !__GREP__) {
-    const srcContext = require.context('../src', true, /^(?!.*index\.tsx?$).*\.tsx?$/);
+    const srcContext = require.context('../src', true, /^(?!.*index\.tsx?$).*\.[jt]sx?$/);
     srcContext.keys().forEach(srcContext);
 }
 
-const testsContext = require.context('./' + __TEST_CONTEXT__, true, __GREP__ || /\.tsx?$/);
+const testsContext = require.context('./' + __TEST_CONTEXT__, true, __GREP__ || /\.[jt]sx?$/);
 testsContext.keys().forEach(testsContext);

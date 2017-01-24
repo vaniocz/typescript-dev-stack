@@ -1,7 +1,7 @@
 export default function log(
     target: Object,
     method: string,
-    descriptor: TypedPropertyDescriptor<any>
+    descriptor: TypedPropertyDescriptor<any>,
 ): TypedPropertyDescriptor<any> {
     const value = descriptor.value;
     
