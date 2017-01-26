@@ -39,6 +39,13 @@
   "engines": {
     "node": ">=6"
   },
+  "dependencies": {
+    "es6-promise": "^4.0.5",
+    "lodash": "^4.17.4",
+    "vue": "^2.1.10",
+    "vue-class-component": "^4.4.0",
+    "whatwg-fetch": "^2.0.1"
+  },
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/lodash": "^4.14.50",
@@ -52,7 +59,6 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "electron": "^1.4.14",
-    "es6-promise": "^4.0.5",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "imports-loader": "^0.7.0",
@@ -69,7 +75,6 @@
     "karma-remap-coverage": "^0.1.4",
     "karma-source-map-support": "^1.2.0",
     "karma-webpack": "^2.0.1",
-    "lodash": "^4.17.4",
     "mocha": "^3.2.0",
     "mocha-multi": "^0.10.0",
     "mocha-remap-istanbul": "^0.1.0",
@@ -83,13 +88,10 @@
     "tslint": "^4.3.1",
     "tslint-microsoft-contrib": "^4.0.0",
     "typescript": "^2.1",
-    "vue": "^2.1.10",
-    "vue-class-component": "^4.4.0",
     "vue-template-loader": "^0.2.1",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
     "webpack-notifier": "^1.5.0",
-    "webpack-split-by-path": "0.1.0-beta.1",
-    "whatwg-fetch": "^2.0.1"
+    "webpack-split-by-path": "0.1.0-beta.1"
   }
 }

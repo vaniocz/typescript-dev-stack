@@ -10,7 +10,6 @@ const SplitByPathPlugin = require('webpack-split-by-path');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const script = process.env.npm_lifecycle_event || '';
-const sinonPath = path.resolve(__dirname, 'node_modules/sinon/pkg/sinon.js');
 const config = {
     entry: {
         index: path.resolve(__dirname, 'src/index.ts'),
@@ -24,7 +23,7 @@ const config = {
         modules: [path.resolve(__dirname, 'src'), 'node_modules'],
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
-            sinon: sinonPath,
+            sinon: 'sinon/pkg/sinon.js',
         },
     },
     devtool: script === 'build' ? false : 'inline-source-map',
@@ -42,8 +41,8 @@ const config = {
                 test: /\.html$/,
                 loader: 'exports-loader?exports!exports-loader?default=module.exports!vue-template-loader',
             }, {
-                test: sinonPath,
-                use: 'imports-loader?require=>false',
+                test: require.resolve('sinon/pkg/sinon'),
+                loader: 'imports-loader?require=>false!exports-loader?exports!exports-loader?default=this.sinon',
             },
         ],
     },
@@ -106,11 +105,6 @@ config.plugins.push(new webpack.DefinePlugin({
 
 if (process.env.TEST) {
     config.target = 'node';
-    config.plugins.push(new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-    }));
 } else {
     config.plugins.push(new SplitByPathPlugin([{
         name: 'vendor',
