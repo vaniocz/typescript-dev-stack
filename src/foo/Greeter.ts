@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 import Bar from 'bar/Bar';
 import log from 'bar/log';
 import myClassMetadata from 'bar/myClassMetadata';

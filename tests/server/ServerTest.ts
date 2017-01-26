@@ -1,6 +1,6 @@
 import {suite, test} from 'mocha-typescript';
 import {assert} from 'chai';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import Bar from 'bar/Bar';
 
 @suite
