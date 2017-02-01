@@ -12,9 +12,5 @@ before_install:
 
 script:
     - npm run lint -s
-    - npm test -s
-    - npm run karma:browser -s -- --browsers Firefox
     - npm run build -s
     - npm run build:dev -s
-    - npm run mocha:coverage -s
-    - npm run karma:coverage -s

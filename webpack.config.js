@@ -4,15 +4,18 @@ const path = require('path');
 const fs = require('fs');
 const minimist = require('minimist');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OutputIgnorePlugin = require('webpack-output-ignore-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 const NotifierPlugin = require('webpack-notifier');
 
 const script = process.env.npm_lifecycle_event || '';
+const indexHtmlPath = path.resolve(__dirname, 'src/index.html');
+const indexScssPath = path.resolve(__dirname, 'src/index.scss');
 const config = {
     entry: {
         index: path.resolve(__dirname, 'src/index.ts'),
+        'index.html': indexHtmlPath,
+        'index.css': indexScssPath,
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -30,6 +33,12 @@ const config = {
     module: {
         rules: [
             {
+                test: indexHtmlPath,
+                loaders: 'file-loader?name=[name].html!extract-loader',
+            }, {
+                test: indexScssPath,
+                loaders: 'file-loader?name=[name].css!extract-loader',
+            }, {
                 test: /\.tsx?$/,
                 use: 'awesome-typescript-loader',
             }, {
@@ -38,34 +47,23 @@ const config = {
                     ? 'css-loader!postcss-loader!sass-loader'
                     : 'css-loader?sourceMap!postcss-loader!sass-loader?sourceMap',
             }, {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=fonts/[name].[ext]',
+            }, {
                 test: /\.html$/,
-                loader: 'exports-loader?exports!exports-loader?default=module.exports!vue-template-loader',
+                loader: 'html-loader?interpolate',
             }, {
                 test: require.resolve('sinon/pkg/sinon'),
                 loader: 'imports-loader?require=>false!exports-loader?exports!exports-loader?default=this.sinon',
             },
         ],
     },
-    plugins: [
-        new CopyWebpackPlugin([
-            {from: path.resolve(__dirname, 'node_modules/vue/dist/vue.min.js')},
-        ]),
-    ],
+    plugins: [new OutputIgnorePlugin({include: ['index.html.js', 'index.css.js']})],
     devServer: {
         historyApiFallback: {index: '/index.html'},
         noInfo: true,
     }
 };
-
-if (script === 'build' || script === 'build:dev') {
-    config.externals = {
-        vue: 'Vue',
-    };
-    config.module.rules[1].loader = ExtractTextPlugin.extract(config.module.rules[1].loader);
-    config.plugins.push(new ExtractTextPlugin('index.css'));
-} else {
-    config.module.rules[1].loader = 'style-loader!' + config.module.rules[1].loader;
-}
 
 if (script === 'build') {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin({comments: false, compress: {warnings: false}}));
@@ -104,6 +102,7 @@ config.plugins.push(new webpack.DefinePlugin({
 }));
 
 if (process.env.TEST) {
+    config.entry = {index: config.entry.index};
     config.target = 'node';
 } else {
     config.plugins.push(new SplitByPathPlugin([{
