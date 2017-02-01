@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
-const WebpackNotifierPlugin = require('webpack-notifier');
+const NotifierPlugin = require('webpack-notifier');
 
 const script = process.env.npm_lifecycle_event || '';
 const config = {
@@ -71,7 +71,7 @@ if (script === 'build' || script === 'build:dev') {
 if (script === 'build') {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin({comments: false, compress: {warnings: false}}));
 } else if (script === 'start') {
-    config.plugins.push(new WebpackNotifierPlugin({alwaysNotify: true}));
+    config.plugins.push(new NotifierPlugin({alwaysNotify: true}));
 }
 
 setupIntellijKarmaReporter();
